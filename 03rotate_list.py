@@ -1,4 +1,5 @@
 #解法1：暴力循环
+#考虑边界条件！！！空集时
 def rotate_list_1(nums,k):
     for i in range(0,k):#循环i次
         perv = nums[len(nums)-1]
@@ -19,12 +20,14 @@ def rotate_list_2(nums,k):
 
 #解法三：反转 [::-1]反转的意思
 def rotate_list_3(nums,k):
+    if len(nums) == 0:
+        return nums
     k %= len(nums)#这个是意思是因为没说k值一定比list的数量少。当k大于len（nums）时，除余
     nums.reverse()
-    nums[:k] = nums[:k].reverse()
-    nums[k:] = nums[k:].reverse()
+    nums[:k] = nums[:k][::-1]
+    nums[k:] = nums[k:][::-1]
     return nums
-print(rotate_list_2(li,9))
+print(rotate_list_3(li,3))
 
 
 

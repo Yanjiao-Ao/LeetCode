@@ -1,28 +1,24 @@
-from itertools import permutations
-
-def solution(s):
+def solution(s):#求除有多少个不同的元音和多少个不同的辅音，然后排列组合。
     if len(s) <= 1:
         return 0
-    dict_v = list('AEOIU')
-    dict_c = list('QWRTYPSDFGHJKLZXCVBNM')
-#print(len(dict_c)+len(dict_v))
+    dict_v = ['A','E','I','O','U']
+    dict_c = ['Q','W','R','T','Y','P','S','D','F','G','H','J','K','L','Z','X','C','V','B','N','M']
+    v = set()
+    c = set()
+    # print(len(dict_c))
+    # print(len(dict_v))
+    for char in s:
+        if char in dict_v:
+            v.add(char)
+        elif char in dict_c:
+            c.add(char)
+    num1 = 1
+    num2 = 1
+    for i in range(1,len(v)+1):
+        num1 *= i
+    for i in range(1,len(c)+1):
+        num2 *= i
+    return num1*num2
 
-#print(dict_v)
-#print(dict_c)
-    words = [''.join(c) for c in permutations(s)]
-    words = set(words)
-
-    useless = set()
-    for word in words:
-        for i in range(0,len(word),2):
-            if word[i] not in dict_c or word[i+1] not in dict_v:
-                useless.add(word)
-    left = words - useless
-    print(left)
-    print(len(left))
-
-#解法二：求除有多少个不同的元音和多少个不同的辅音，然后排列组合。
-
-
-s = 'CATE'
-solution(s)
+s = 'AABCY'
+print(solution(s))
